@@ -1,66 +1,23 @@
 import React from 'react';
-import { StyleSheet, View  } from 'react-native';
-import {createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
-import DeckList from './components/DeckList';
-import DeckItem from './components/DeckItem';
-import DeckNew from './components/DeckNew';
-import {black, white, purple} from './utils/colors';
+import { StyleSheet, View, StatusBar  } from 'react-native';
+import {black} from './utils/colors';
+import {Constants} from 'expo';
+import MainNavigator from './components/MainNavigator';
 
-const Tabs = createMaterialTopTabNavigator({
-  DeckList: {
-    screen: DeckList,
-    navigationOptions: {
-      tabBarLabel: 'Decks',
-    },
-  },
-  NewDeck: {
-    screen: DeckNew,
-    navigationOptions: {
-      tabBarLabel: 'New Deck',
-    },
-  },
-}, {
-  navigationOptions: {
-  },
-  tabBarOptions: {
-    activeTintColor: black,
-    style: {
-      height: 56,
-      backgroundColor: purple,
-      /*shadowColor: 'rgba(0, 0, 0, 0.24)',
-      shadowOffset: {
-        width: 0,
-        height: 3,
-      },
-      shadowRadius: 6,
-      shadowOpacity: 1,*/
-    },
-  },
-});
-
-const Navigator = createStackNavigator({
-  Home: {
-    screen: Tabs,
-    navigationOptions: {
-      header: null,
-    },
-  },
-  DeckItem: {
-    screen: DeckItem,
-    navigationOptions: {
-      headerTintColor: black,
-      headerStyle: {
-        backgroundColor: white,
-      },
-    },
-  },
-});
+function FlashCardStatusBar ({backgroundColor, ...props}) {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  );
+}
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Tabs/>
+        <FlashCardStatusBar backgroundColor={black} barStyle="light-content" />
+        <MainNavigator/>
       </View>
     );
   }
@@ -69,8 +26,5 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

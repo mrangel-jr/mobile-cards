@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 
-const DeckList = () => {
+class DeckList extends Component {
 
+    render() {
         return (
-            <View>
-                <Text>DeckList !!</Text>
-            </View>
+            <FlatList
+                data={[{key: 'a'}, {key: 'b'}]}
+                renderItem={({item}) => <Text>{item.key}</Text>}
+            />
         );
+    }
+}
 
-};
 export default DeckList;

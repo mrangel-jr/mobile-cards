@@ -1,70 +1,60 @@
 import React from 'react';
-import {createMaterialTopTabNavigator, View} from 'react-native';
-import {createStackNavigator} from 'react-navigation';
+import {View} from 'react-native';
+import {createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
 import DeckList from './DeckList';
 import DeckItem from './DeckItem';
 import DeckNew from './DeckNew';
-import {black, white} from '../utils/colors';
+import {black, white, gray} from '../utils/colors';
 
 
 const Tabs = createMaterialTopTabNavigator({
-    DeckList: {
-      screen: {DeckList},
-      navigationOptions: {
-        tabBarLabel: 'Decks',
-        // tabBarIcon: ({ tintColor }) => <Ionicons name="ios-bookmarks" size={30} color={tintColor} />,
-      },
+  DeckList: {
+    screen: DeckList,
+    navigationOptions: {
+      tabBarLabel: 'Decks',
     },
-    DeckNew: {
-      screen: {DeckNew},
-      navigationOptions: {
-        tabBarLabel: 'New Deck',
-        // tabBarIcon: ({ tintColor }) => <FontAwesome name="plus-square" size={30} color={tintColor} />,
-      },
+  },
+  NewDeck: {
+    screen: DeckNew,
+    navigationOptions: {
+      tabBarLabel: 'New Deck',
     },
-  }, {
+  },
+}, {
+  navigationOptions: {
+    swipeEnabled: true,
+  },
+  tabBarOptions: {
+    activeTintColor: black,
+    inactiveTintColor: gray,
+    style: {
+      height: 56,
+      backgroundColor: white,
+    },
+  },
+});
+
+const Navigator = createStackNavigator({
+  Home: {
+    screen: Tabs,
     navigationOptions: {
       header: null,
     },
-    tabBarOptions: {
-      activeTintColor: black,
-      style: {
-        height: 56,
-        backgroundColor: white,
-        shadowColor: 'rgba(0, 0, 0, 0.24)',
-        shadowOffset: {
-          width: 0,
-          height: 3,
-        },
-        shadowRadius: 6,
-        shadowOpacity: 1,
+  },
+  DeckItem: {
+    screen: DeckItem,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: black,
       },
     },
-  });
-
-  const Navigator = createStackNavigator({
-    Home: {
-      screen: Tabs,
-      navigationOptions: {
-        header: null,
-      },
-    },
-    DeckItem: {
-      screen: {DeckItem},
-      navigationOptions: {
-        headerTintColor: black,
-        headerStyle: {
-          backgroundColor: white,
-        },
-      },
-    },
-  });
+  },
+});
 
   const MainNavigator = () => {
       return (
-            <View>
-              <Navigator/>
-            </View>
+          <Navigator/>
       );
   };
 
