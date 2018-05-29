@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, KeyboardAvoidingView} from 'react-native';
 import {createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
 import DeckList from './DeckList';
 import DeckItem from './DeckItem';
@@ -14,7 +14,7 @@ const Tabs = createMaterialTopTabNavigator({
       tabBarLabel: 'Decks',
     },
   },
-  NewDeck: {
+  DeckNew: {
     screen: DeckNew,
     navigationOptions: {
       tabBarLabel: 'New Deck',
@@ -54,7 +54,9 @@ const Navigator = createStackNavigator({
 
   const MainNavigator = () => {
       return (
+         <KeyboardAvoidingView behavior='padding' style={{flex:1}}>
           <Navigator/>
+        </KeyboardAvoidingView>
       );
   };
 

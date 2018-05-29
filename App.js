@@ -3,6 +3,9 @@ import { StyleSheet, View, StatusBar  } from 'react-native';
 import {black} from './utils/colors';
 import {Constants} from 'expo';
 import MainNavigator from './components/MainNavigator';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import reducer from './reducers';
 
 function FlashCardStatusBar ({backgroundColor, ...props}) {
   return (
@@ -15,10 +18,12 @@ function FlashCardStatusBar ({backgroundColor, ...props}) {
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <FlashCardStatusBar backgroundColor={black} barStyle="light-content" />
-        <MainNavigator/>
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={styles.container}>
+          <FlashCardStatusBar backgroundColor={black} barStyle="light-content" />
+          <MainNavigator/>
+        </View>
+      </Provider>
     );
   }
 }

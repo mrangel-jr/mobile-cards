@@ -5,37 +5,69 @@ import {
         StyleSheet,
         TextInput,
         TouchableOpacity,
-        KeyboardAvoidingView,
     } from 'react-native';
 import {black,white} from '../utils/colors';
+import { addData } from '../actions';
+import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
 
 class DeckNew extends Component {
     state = {
-        items:null,
+        questions:[],
+        title:'',
+    }
+
+    submit = () => {
+
+        const key = this.props.key;
+        const value = this.state;
+
+        this.props.dispatch(addData({
+          [key]:value,
+        }));
+
+        this.setState(() => ({ questions:[], title:'' }));
+
+        this.toHome();
+
+        // submitEntry({key,entry});
+
+        // clearLocalNotification()
+        // .then(setLocalNotification);
+    }
+
+    toHome = () => {
+        this.props.navigation.dispatch(NavigationActions.back({key:'DeckNew'}));
     }
 
     render() {
+
         return (
             <View style={styles.container}>
                 <Text style={styles.textQuestion}>
                     What is the title of your new deck ?
                 </Text>
-                <KeyboardAvoidingView
-                    behavior="padding" enabled>
-                    <View>
-                        <TextInput
-                            style={styles.inputText}
-                            placeholder="Deck Title"
-                        />
-                    </View>
-                </KeyboardAvoidingView>
-                <TouchableOpacity style={styles.btnSubmit}>
+                <View>
+                    <TextInput
+                        style={styles.inputText}
+                        placeholder="Deck Title"
+                        onChangeText={(title) => this.setState({title})}
+                        value={this.state.title}
+                    />
+                </View>
+                <TouchableOpacity style={styles.btnSubmit} onPress={this.submit}>
                     <Text style={styles.textSubmit}>Submit</Text>
                 </TouchableOpacity>
             </View>
         );
     }
-};
+}
+
+function mapStateToProps(state) {
+    return {
+        key: state.title,
+    };
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -78,5 +110,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default DeckNew;
-
+export default connect(mapStateToProps)(DeckNew);
