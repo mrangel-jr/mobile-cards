@@ -1,9 +1,9 @@
 export const ADD_DATA = 'ADD_DATA';
-export const RECEIVE_DATA = 'RECEIVE_DATA';
+export const ADD_CARD = 'ADD_CARD';
 
-export function receiveData (data) {
+export function addCard (data) {
     return {
-        type: RECEIVE_DATA,
+        type: ADD_CARD,
         data,
     };
 }

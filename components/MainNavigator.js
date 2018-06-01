@@ -1,9 +1,11 @@
 import React from 'react';
-import {View, KeyboardAvoidingView} from 'react-native';
+import {KeyboardAvoidingView, StyleSheet} from 'react-native';
 import {createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
 import DeckList from './DeckList';
 import DeckItem from './DeckItem';
 import DeckNew from './DeckNew';
+import DeckQuiz from './DeckQuiz';
+import DeckAddCard from './DeckAddCard';
 import {black, white, gray} from '../utils/colors';
 
 
@@ -50,14 +52,39 @@ const Navigator = createStackNavigator({
       },
     },
   },
+  DeckQuiz: {
+    screen: DeckQuiz,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: black,
+      },
+    },
+  },
+  DeckAddCard: {
+    screen: DeckAddCard,
+    navigationOptions: {
+      headerTitle: 'Add card',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: black,
+      },
+    },
+  },
 });
 
   const MainNavigator = () => {
       return (
-         <KeyboardAvoidingView behavior='padding' style={{flex:1}}>
+         <KeyboardAvoidingView behavior="padding" style={styles.container}>
           <Navigator/>
         </KeyboardAvoidingView>
       );
   };
+
+  const styles = StyleSheet.create({
+    container:{
+      flex:1,
+    },
+  });
 
   export default MainNavigator;

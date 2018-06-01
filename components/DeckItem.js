@@ -1,23 +1,30 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {black,gray} from '../utils/colors';
 
 class DeckItem extends Component {
 
+    onClick = () => {
+        const {item} = this.props;
+
+        return this.props.navigation.navigate(
+                'DeckQuiz',
+                { quizTitle: item.title }
+        );
+    };
+
     render() {
         const {item} = this.props;
 
-        console.log(item);
-
         return (
-            <View style={styles.container}>
+            <TouchableOpacity style={styles.container} onPress={this.onClick}>
                 <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.subTitle}>{item.questions.length} cards</Text>
-            </View>
+            </TouchableOpacity>
         );
     }
 
-};
+}
 
 const styles = StyleSheet.create({
     container:{
@@ -27,11 +34,11 @@ const styles = StyleSheet.create({
         marginTop:10,
     },
     title: {
-        fontSize: 20,
+        fontSize: 36,
         color: black,
     },
     subTitle: {
-        fontSize:14,
+        fontSize:20,
         color: gray,
     },
 });

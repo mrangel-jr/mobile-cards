@@ -1,8 +1,8 @@
-import { RECEIVE_DATA, ADD_DATA } from '../actions';
+import { ADD_CARD, ADD_DATA } from '../actions';
 
 function entries (state = {}, action) {
     switch (action.type) {
-        case RECEIVE_DATA:
+        case ADD_CARD:
             return {
                     ...state,
                     ...action.data,
@@ -11,7 +11,7 @@ function entries (state = {}, action) {
             return {
                 ...state,
                 ...action.data,
-        };
+            };
         default:
             return state;
     }

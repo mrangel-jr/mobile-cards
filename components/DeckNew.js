@@ -50,7 +50,6 @@ class DeckNew extends Component {
 
         const {title} = this.state;
 
-        console.log(title);
         return (
             <View style={styles.container}>
                 <Text style={styles.textQuestion}>
