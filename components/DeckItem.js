@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {black,gray} from '../utis/colors';
+import {black,gray} from '../utils/colors';
 
 class DeckItem extends Component {
 
     render() {
-        const item = this.props;
+        const {item} = this.props;
+
+        console.log(item);
 
         return (
-            <View>
-                <Text style={styles.title}>item.title</Text>
-                <Text style={styles.title}>`${item.questions.length} cards`</Text>
+            <View style={styles.container}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.subTitle}>{item.questions.length} cards</Text>
             </View>
         );
     }
@@ -22,6 +24,7 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems: 'center',
         justifyContent:'center',
+        marginTop:10,
     },
     title: {
         fontSize: 20,

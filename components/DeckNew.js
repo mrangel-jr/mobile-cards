@@ -17,13 +17,19 @@ class DeckNew extends Component {
         title:'',
     }
 
+    changeText = (title) => {
+        this.setState(() => ({
+          title,
+        }));
+    }
+
     submit = () => {
 
-        const key = this.props.key;
+        const {title} = this.state;
         const value = this.state;
 
         this.props.dispatch(addData({
-          [key]:value,
+          [title]:value,
         }));
 
         this.setState(() => ({ questions:[], title:'' }));
@@ -42,6 +48,9 @@ class DeckNew extends Component {
 
     render() {
 
+        const {title} = this.state;
+
+        console.log(title);
         return (
             <View style={styles.container}>
                 <Text style={styles.textQuestion}>
@@ -51,8 +60,8 @@ class DeckNew extends Component {
                     <TextInput
                         style={styles.inputText}
                         placeholder="Deck Title"
-                        onChangeText={(title) => this.setState({title})}
-                        value={this.state.title}
+                        onChangeText={(text) => this.changeText(text)}
+                        value={title}
                     />
                 </View>
                 <TouchableOpacity style={styles.btnSubmit} onPress={this.submit}>
