@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, StatusBar  } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import {black} from './utils/colors';
 import {Constants} from 'expo';
 import MainNavigator from './components/MainNavigator';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import reducer from './reducers';
+import { setLocalNotification } from './utils/helpers';
 
 function FlashCardStatusBar ({backgroundColor, ...props}) {
   return (
@@ -16,6 +17,11 @@ function FlashCardStatusBar ({backgroundColor, ...props}) {
 }
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>

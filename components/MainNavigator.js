@@ -6,6 +6,8 @@ import DeckItem from './DeckItem';
 import DeckNew from './DeckNew';
 import DeckQuiz from './DeckQuiz';
 import DeckAddCard from './DeckAddCard';
+import DeckStartQuiz from './DeckStartQuiz';
+import DeckResultQuiz from './DeckResultQuiz';
 import {black, white, gray} from '../utils/colors';
 
 
@@ -65,6 +67,26 @@ const Navigator = createStackNavigator({
     screen: DeckAddCard,
     navigationOptions: {
       headerTitle: 'Add card',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: black,
+      },
+    },
+  },
+  DeckStartQuiz: {
+    screen: DeckStartQuiz,
+    navigationOptions: {
+      headerTitle: 'Quiz',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: black,
+      },
+    },
+  },
+  DeckResultQuiz: {
+    screen: DeckResultQuiz,
+    navigationOptions: {
+      headerTitle: 'Quiz',
       headerTintColor: white,
       headerStyle: {
         backgroundColor: black,

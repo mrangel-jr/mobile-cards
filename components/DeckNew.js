@@ -9,6 +9,7 @@ import {
 import {black,white} from '../utils/colors';
 import { addData } from '../actions';
 import { NavigationActions } from 'react-navigation';
+import {saveDeckTitle} from '../utils/api';
 import { connect } from 'react-redux';
 
 class DeckNew extends Component {
@@ -32,14 +33,12 @@ class DeckNew extends Component {
           [title]:value,
         }));
 
+        saveDeckTitle(title);
+
         this.setState(() => ({ questions:[], title:'' }));
 
         this.toHome();
 
-        // submitEntry({key,entry});
-
-        // clearLocalNotification()
-        // .then(setLocalNotification);
     }
 
     toHome = () => {

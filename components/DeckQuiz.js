@@ -3,8 +3,13 @@ import {View, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import CardButton from './CardButton';
 import {black,white,gray} from '../utils/colors';
+import {clearLocalNotification, setLocalNotification} from '../utils/helpers';
 
 class DeckQuiz extends Component {
+
+    state = {
+        ready: true,
+    }
 
     static navigationOptions = ({ navigation }) => {
         return {
@@ -12,11 +17,40 @@ class DeckQuiz extends Component {
         };
     };
 
+    onRefresh = (data) => {
+        this.setState({
+            ready:data,
+        });
+    }
+
+    componentDidMount = () => {
+        const {ready} = this.state;
+        if (!ready) {
+            this.onRefresh(!ready);
+        }
+    }
+
     addCard = () => {
         const {quizTitle} = this.props;
+
         return this.props.navigation.navigate(
             'DeckAddCard',
-            { quizTitle }
+            { quizTitle,
+              onRefresh: this.onRefresh,
+            }
+        );
+    }
+
+    startQuiz = () => {
+        const {quizTitle} = this.props;
+
+        clearLocalNotification()
+        .then(setLocalNotification);
+
+        return this.props.navigation.navigate(
+            'DeckStartQuiz',
+            { quizTitle,
+            }
         );
     }
 
@@ -25,8 +59,6 @@ class DeckQuiz extends Component {
         const {item} = this.props;
 
         const {title,questions} = item;
-
-        console.log(questions);
 
         return (
             <View style={styles.container}>
@@ -38,7 +70,7 @@ class DeckQuiz extends Component {
                     <CardButton style={styles.btnAddCard} onPress={this.addCard}>
                         <Text style={styles.txtAddCard}>Add Card</Text>
                     </CardButton>
-                    <CardButton style={styles.btnStartQuiz} onPress={() => console.log(`It's a trap!!`)}>
+                    <CardButton style={styles.btnStartQuiz} onPress={this.startQuiz}>
                         <Text style={styles.txtStartQuiz}>Start Quiz</Text>
                     </CardButton>
                 </View>
