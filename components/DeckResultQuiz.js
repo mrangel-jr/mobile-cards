@@ -9,6 +9,16 @@ class DeckResultQuiz extends Component {
     tryAgain = () => {
         const {quizTitle} = this.props;
         this.props.navigation.navigate(
+            'DeckStartQuiz',
+            {
+                quizTitle,
+            }
+        );
+    }
+    
+    backToDeck = () => {
+        const {quizTitle} = this.props;
+        this.props.navigation.navigate(
             'DeckQuiz',
             {
                 quizTitle,
@@ -33,6 +43,9 @@ class DeckResultQuiz extends Component {
                 <View style={styles.btnContainer}>
                     <CardButton style={styles.btnTryAgain} onPress={this.tryAgain}>
                         <Text style={styles.txtTryAgain}>Try Again</Text>
+                    </CardButton>
+                    <CardButton style={styles.btnBackToBack} onPress={this.backtoDeck}>
+                        <Text style={styles.txtBackToDeck}>Back to Deck</Text>
                     </CardButton>
                     <CardButton style={styles.btnGoHome} onPress={this.goHome}>
                         <Text style={styles.txtGoHome}>Go Home</Text>
@@ -89,11 +102,23 @@ const styles = StyleSheet.create({
         color:black,
     },
     btnGoHome: {
-        backgroundColor: black,
+        backgroundColor: white,
+        borderColor:black,
+        borderWidth: 1,
         marginTop:10,
         marginBottom:10,
     },
     txtGoHome: {
+        fontSize: 20,
+        color:black,
+    },
+    ,
+    btnBackToBack: {
+        backgroundColor: black,
+        marginTop:10,
+        marginBottom:10,
+    },
+    txtBackToDeck: {
         fontSize: 20,
         color:white,
     },
