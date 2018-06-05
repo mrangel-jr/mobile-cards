@@ -8,7 +8,7 @@ import {
     } from 'react-native';
 import {black,white} from '../utils/colors';
 import { addData } from '../actions';
-import { NavigationActions } from 'react-navigation';
+//import { NavigationActions } from 'react-navigation';
 import {saveDeckTitle} from '../utils/api';
 import { connect } from 'react-redux';
 
@@ -37,12 +37,17 @@ class DeckNew extends Component {
 
         this.setState(() => ({ questions:[], title:'' }));
 
-        this.toHome();
+        this.toDeckQuiz(title);
 
     }
 
-    toHome = () => {
-        this.props.navigation.dispatch(NavigationActions.back({key:'DeckNew'}));
+    toDeckQuiz = (quizTitle) => {
+        //this.props.navigation.dispatch(NavigationActions.back({key:'DeckNew'}));
+        this.props.navigation.navigate(
+            'DeckQuiz',
+            { quizTitle,
+            }
+        );
     }
 
     render() {
