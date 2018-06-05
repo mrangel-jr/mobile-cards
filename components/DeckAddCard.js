@@ -26,7 +26,11 @@ class DeckAddCard extends Component {
     }
 
     onSubmit = () => {
-
+        
+        if (this.state.question === '' || this.state.answer === ''){
+            return Alert.alert('All fields are mandatory.');
+        }
+        
         const {item,quizTitle} = this.props;
 
         item.questions.push(this.state);
@@ -56,7 +60,7 @@ class DeckAddCard extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.textContainer}>
-                    <Text>Enter your question</Text>
+                    <Text>Enter your question*</Text>
                     <TextInput
                         placeholder="Your question"
                         style={styles.inputText}
@@ -65,7 +69,7 @@ class DeckAddCard extends Component {
                         />
                 </View>
                 <View style={styles.textContainer}>
-                    <Text>Enter your answer</Text>
+                    <Text>Enter your answer*</Text>
                     <TextInput
                         placeholder="Your anwser"
                         style={styles.inputText}
