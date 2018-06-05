@@ -44,9 +44,6 @@ class DeckQuiz extends Component {
     startQuiz = () => {
         const {quizTitle} = this.props;
 
-        clearLocalNotification()
-        .then(setLocalNotification);
-
         return this.props.navigation.navigate(
             'DeckStartQuiz',
             { quizTitle,
