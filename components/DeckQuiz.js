@@ -67,9 +67,12 @@ class DeckQuiz extends Component {
                     <CardButton style={styles.btnAddCard} onPress={this.addCard}>
                         <Text style={styles.txtAddCard}>Add Card</Text>
                     </CardButton>
-                    <CardButton style={styles.btnStartQuiz} onPress={this.startQuiz}>
+                    { 
+                     question.length > 0 && (  
+                     <CardButton style={styles.btnStartQuiz} onPress={this.startQuiz}>
                         <Text style={styles.txtStartQuiz}>Start Quiz</Text>
                     </CardButton>
+                    )}
                 </View>
             </View>
         );
