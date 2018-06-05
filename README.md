@@ -25,6 +25,20 @@ Below you'll find information about performing common tasks. The most recent ver
   * [Networking](#networking)
   * [iOS Simulator won't open](#ios-simulator-wont-open)
   * [QR Code does not scan](#qr-code-does-not-scan)
+  
+## Installation
+  ```
+  npm install
+  ```
+## Usage
+  ```
+  yarn start
+  or
+  npm start
+  ```
+## Platforms tested
+
+The app was tested in Android plataform using Expo on smaartphone. To install Expo on smartphone, download Expo at Play Store.
 
 ## Updating to New Releases
 
