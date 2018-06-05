@@ -9,7 +9,7 @@ import {
 import {black,white} from '../utils/colors';
 import { addData } from '../actions';
 //import { NavigationActions } from 'react-navigation';
-import {saveDeckTitle} from '../utils/api';
+import {saveDeckTitle, getDeck} from '../utils/api';
 import { connect } from 'react-redux';
 
 class DeckNew extends Component {
@@ -27,6 +27,15 @@ class DeckNew extends Component {
     submit = () => {
 
         const {title} = this.state;
+            
+        if (title === ''){
+            return Alert.alert('All fields are mandatory.');
+        }
+            
+        if (getDeck(title) !== undefined){
+            return Alert.alert('Can not insert an existing title.');
+        }
+
         const value = this.state;
 
         this.props.dispatch(addData({
