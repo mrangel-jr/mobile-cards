@@ -120,15 +120,19 @@ class DeckStartQuiz extends Component {
         const {quizTitle} = this.props;
         const percentual = Math.floor( correctAnswer / total * 100);
 
-        (index === total) ? this.props.navigation.navigate(
-            'DeckResultQuiz',
-            {
-                percentual,
-                quizTitle,
-            }
-        ) : this.setState({isFlipped: !this.state.isFlipped,
-            index,
-        });
+        if(index === total){
+            createLocalNotification()
+                  .then(setLocalNotification)
+            this.props.navigation.navigate(
+                  'DeckResultQuiz',
+                  {
+                      percentual,
+                      quizTitle,
+                  }
+            )
+      }else{
+         this.setState({isFlipped: !this.state.isFlipped, index})
+      }
     }
 }
 
