@@ -1,6 +1,6 @@
 import React from 'react';
 import {KeyboardAvoidingView, StyleSheet} from 'react-native';
-import {createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
+import {createStackNavigator, createMaterialTopTabNavigator, createBottomTabNavigator} from 'react-navigation';
 import DeckList from './DeckList';
 import DeckItem from './DeckItem';
 import DeckNew from './DeckNew';
@@ -8,6 +8,9 @@ import DeckQuiz from './DeckQuiz';
 import DeckAddCard from './DeckAddCard';
 import DeckStartQuiz from './DeckStartQuiz';
 import DeckResultQuiz from './DeckResultQuiz';
+import DeckShowQuestions from './DeckShowQuestions';
+import DeckHistoryQuestions from './DeckHistoryQuestions';
+import {MaterialIcons} from '@expo/vector-icons';
 import {black, white, gray} from '../utils/colors';
 
 
@@ -37,6 +40,48 @@ const Tabs = createMaterialTopTabNavigator({
     },
   },
 });
+
+const BottomTabs = createBottomTabNavigator(
+  {
+    DeckShowQuestions: {
+      screen:DeckShowQuestions,
+      navigationOptions: {
+        tabBarLabel: 'Questions',
+      },
+    },
+    DeckHistoryQuestions: {
+      screen: DeckHistoryQuestions,
+      navigationOptions: {
+        tabBarLabel: 'History',
+      },
+    },
+  }, {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'DeckShowQuestions') {
+          iconName = 'question-answer';
+        } else if (routeName === 'DeckHistoryQuestions') {
+          iconName = 'history';
+        }
+
+        // You can return any component that you like here! We usually use an
+        // icon component from react-native-vector-icons
+        return <MaterialIcons name={iconName} size={25} color={tintColor} />;
+      },
+    }),
+    tabBarOptions: {
+      initialRouteName: 'DeckShowQuestions',
+      activeTintColor: black,
+      inactiveTintColor: gray,
+      style: {
+        height: 56,
+        backgroundColor: white,
+      },
+    },
+  },
+);
 
 const Navigator = createStackNavigator({
   Home: {
@@ -93,7 +138,14 @@ const Navigator = createStackNavigator({
       },
     },
   },
+  DeckListQuestions: {
+    screen: BottomTabs,
+    navigationOptions: {
+      header: null,
+    },
+  },
 });
+
 
   const MainNavigator = () => {
       return (

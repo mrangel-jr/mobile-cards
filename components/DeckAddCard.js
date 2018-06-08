@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {addCard} from '../actions';
-import {View,Text,TextInput,StyleSheet} from 'react-native';
+import {View,Text,TextInput,StyleSheet, Alert} from 'react-native';
 import CardButton from './CardButton';
 import {black,white, gray} from '../utils/colors';
 import {addCardToDeck} from '../utils/api';
@@ -26,11 +26,11 @@ class DeckAddCard extends Component {
     }
 
     onSubmit = () => {
-        
+
         if (this.state.question === '' || this.state.answer === ''){
             return Alert.alert('All fields are mandatory.');
         }
-        
+
         const {item,quizTitle} = this.props;
 
         item.questions.push(this.state);

@@ -3,7 +3,6 @@ import {View, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import CardButton from './CardButton';
 import {black,white,gray} from '../utils/colors';
-import {clearLocalNotification, setLocalNotification} from '../utils/helpers';
 
 class DeckQuiz extends Component {
 
@@ -41,6 +40,17 @@ class DeckQuiz extends Component {
         );
     }
 
+    showQuestions = () => {
+        const {quizTitle, questions} = this.props;
+
+        return this.props.navigation.navigate(
+            'DeckListQuestions',
+            { quizTitle,
+              questions,
+            }
+        );
+    }
+
     startQuiz = () => {
         const {quizTitle} = this.props;
 
@@ -53,9 +63,9 @@ class DeckQuiz extends Component {
 
     render() {
 
-        const {item} = this.props;
+        // const {item} = this.props;
 
-        const {title,questions} = item;
+        const {title,questions} = this.props;
 
         return (
             <View style={styles.container}>
@@ -67,11 +77,16 @@ class DeckQuiz extends Component {
                     <CardButton style={styles.btnAddCard} onPress={this.addCard}>
                         <Text style={styles.txtAddCard}>Add Card</Text>
                     </CardButton>
-                    { 
-                     question.length > 0 && (  
-                     <CardButton style={styles.btnStartQuiz} onPress={this.startQuiz}>
-                        <Text style={styles.txtStartQuiz}>Start Quiz</Text>
-                    </CardButton>
+                    {
+                        questions.length > 0 && (
+                        <View>
+                            <CardButton style={styles.btnStartQuiz} onPress={this.showQuestions}>
+                                <Text style={styles.txtStartQuiz}>Show Questions</Text>
+                            </CardButton>
+                            <CardButton style={styles.btnStartQuiz} onPress={this.startQuiz}>
+                                <Text style={styles.txtStartQuiz}>Start Quiz</Text>
+                            </CardButton>
+                        </View>
                     )}
                 </View>
             </View>
@@ -85,6 +100,8 @@ function mapStateToProps (state, { navigation }) {
     return {
         quizTitle,
         item: state[quizTitle],
+        questions: state[quizTitle].questions,
+        title: state[quizTitle].title,
     };
 }
 

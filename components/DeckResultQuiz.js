@@ -15,7 +15,7 @@ class DeckResultQuiz extends Component {
             }
         );
     }
-    
+
     backToDeck = () => {
         const {quizTitle} = this.props;
         this.props.navigation.navigate(
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color:black,
     },
-    ,
     btnBackToBack: {
         backgroundColor: black,
         marginTop:10,

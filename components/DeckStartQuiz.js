@@ -4,6 +4,7 @@ import FlipView from 'react-native-flip-view-next';
 import {red, green, black, white} from '../utils/colors';
 import {connect} from 'react-redux';
 import CardButton from './CardButton';
+import {createLocalNotification, setLocalNotification} from '../utils/helpers';
 
 class DeckStartQuiz extends Component {
 
@@ -120,18 +121,18 @@ class DeckStartQuiz extends Component {
         const {quizTitle} = this.props;
         const percentual = Math.floor( correctAnswer / total * 100);
 
-        if(index === total){
+        if ( index === total ){
             createLocalNotification()
-                  .then(setLocalNotification)
+                  .then(setLocalNotification);
             this.props.navigation.navigate(
                   'DeckResultQuiz',
                   {
                       percentual,
                       quizTitle,
                   }
-            )
-      }else{
-         this.setState({isFlipped: !this.state.isFlipped, index})
+            );
+      } else {
+         this.setState({isFlipped: !this.state.isFlipped, index});
       }
     }
 }

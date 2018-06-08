@@ -61,6 +61,7 @@ export function getBasicStructure(key) {
       key:{
         questions:[],
         title:key,
+        history:[],
     },
   };
 }

@@ -5,6 +5,7 @@ import {
         StyleSheet,
         TextInput,
         TouchableOpacity,
+        Alert,
     } from 'react-native';
 import {black,white} from '../utils/colors';
 import { addData } from '../actions';
@@ -27,12 +28,13 @@ class DeckNew extends Component {
     submit = () => {
 
         const {title} = this.state;
-            
+        const {items} = this.props;
+
         if (title === ''){
             return Alert.alert('All fields are mandatory.');
         }
-            
-        if (getDeck(title) !== undefined){
+
+        if (Object.keys(items).includes(title) === true) {
             return Alert.alert('Can not insert an existing title.');
         }
 
@@ -87,6 +89,7 @@ class DeckNew extends Component {
 function mapStateToProps(state) {
     return {
         key: state.title,
+        items:state,
     };
 }
 
