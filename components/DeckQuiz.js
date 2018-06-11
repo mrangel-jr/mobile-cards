@@ -40,17 +40,6 @@ class DeckQuiz extends Component {
         );
     }
 
-    showQuestions = () => {
-        const {quizTitle, questions} = this.props;
-
-        return this.props.navigation.navigate(
-            'DeckListQuestions',
-            { quizTitle,
-              questions,
-            }
-        );
-    }
-
     startQuiz = () => {
         const {quizTitle} = this.props;
 
@@ -80,9 +69,6 @@ class DeckQuiz extends Component {
                     {
                         questions.length > 0 && (
                         <View>
-                            <CardButton style={styles.btnStartQuiz} onPress={this.showQuestions}>
-                                <Text style={styles.txtStartQuiz}>Show Questions</Text>
-                            </CardButton>
                             <CardButton style={styles.btnStartQuiz} onPress={this.startQuiz}>
                                 <Text style={styles.txtStartQuiz}>Start Quiz</Text>
                             </CardButton>

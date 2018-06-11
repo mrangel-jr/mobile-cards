@@ -9,13 +9,12 @@ import {
     } from 'react-native';
 import {black,white} from '../utils/colors';
 import { addData } from '../actions';
-//import { NavigationActions } from 'react-navigation';
-import {saveDeckTitle, getDeck} from '../utils/api';
+import {saveDeckTitle} from '../utils/api';
+import {getBasicStructure} from '../utils/helpers';
 import { connect } from 'react-redux';
 
 class DeckNew extends Component {
     state = {
-        questions:[],
         title:'',
     }
 
@@ -38,7 +37,7 @@ class DeckNew extends Component {
             return Alert.alert('Can not insert an existing title.');
         }
 
-        const value = this.state;
+        const value = getBasicStructure(title).key;
 
         this.props.dispatch(addData({
           [title]:value,
@@ -46,14 +45,13 @@ class DeckNew extends Component {
 
         saveDeckTitle(title);
 
-        this.setState(() => ({ questions:[], title:'' }));
+        this.setState(() => ({ title:'' }));
 
         this.toDeckQuiz(title);
 
     }
 
     toDeckQuiz = (quizTitle) => {
-        //this.props.navigation.dispatch(NavigationActions.back({key:'DeckNew'}));
         this.props.navigation.navigate(
             'DeckQuiz',
             { quizTitle,

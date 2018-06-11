@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {FlatList} from 'react-native';
 import DeckItem from './DeckItem';
 import { addData } from '../actions';
-import { getDecks } from '../utils/api';
+import { getDecks, resetKey } from '../utils/api';
 import { connect } from 'react-redux';
 
 class DeckList extends Component {

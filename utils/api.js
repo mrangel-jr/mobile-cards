@@ -14,7 +14,7 @@ export function addCardToDeck (title, card ) {
 
 export function saveDeckTitle (title) {
     return AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, JSON.stringify({
-      [title] : getBasicStructure(title),
+      [title] : getBasicStructure(title).key,
     }));
 }
 
@@ -33,3 +33,10 @@ export function getDeck (title) {
       });
 }
 
+export function resetKey () {
+  try {
+    return AsyncStorage.removeItem(FLASHCARD_STORAGE_KEY);
+  } catch (error) {
+    console.log(error);
+  }
+}

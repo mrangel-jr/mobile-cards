@@ -58,13 +58,9 @@ export function setLocalNotification () {
 
 export function getBasicStructure(key) {
   return {
-      key:{
-        questions:[],
-        title:key,
-        history: {
-          status: false,
-          history_questions:[],
-        },
+    key:{
+      questions:[],
+      title:key,
     },
   };
 }

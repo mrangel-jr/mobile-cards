@@ -2,18 +2,13 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import CardButton from './CardButton';
 import {connect} from 'react-redux';
+import {NavigationActions} from 'react-navigation';
 import {black,white,gray} from '../utils/colors';
 
 class DeckResultQuiz extends Component {
 
     tryAgain = () => {
-        const {quizTitle} = this.props;
-        this.props.navigation.navigate(
-            'DeckStartQuiz',
-            {
-                quizTitle,
-            }
-        );
+        this.props.navigation.goBack();
     }
 
     backToDeck = () => {
@@ -27,7 +22,11 @@ class DeckResultQuiz extends Component {
     }
 
     goHome = () => {
-        this.props.navigation.navigate('Home');
+        const navigateAction = NavigationActions.navigate({
+            routeName: 'Home',
+            action: NavigationActions.navigate({ routeName: 'DeckList' }),
+        });
+        this.props.navigation.dispatch(navigateAction);
     }
 
     render() {
@@ -44,7 +43,7 @@ class DeckResultQuiz extends Component {
                     <CardButton style={styles.btnTryAgain} onPress={this.tryAgain}>
                         <Text style={styles.txtTryAgain}>Try Again</Text>
                     </CardButton>
-                    <CardButton style={styles.btnBackToBack} onPress={this.backtoDeck}>
+                    <CardButton style={styles.btnBackToBack} onPress={this.backToDeck}>
                         <Text style={styles.txtBackToDeck}>Back to Deck</Text>
                     </CardButton>
                     <CardButton style={styles.btnGoHome} onPress={this.goHome}>

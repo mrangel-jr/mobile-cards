@@ -87,7 +87,7 @@ class DeckStartQuiz extends Component {
         });
         setTimeout(() => {
             this._flipToFront();
-        }, 2000);
+        }, 1000);
     }
 
     _onIncorrectAnswer = () => {
@@ -97,7 +97,7 @@ class DeckStartQuiz extends Component {
 
         setTimeout(() => {
             this._flipToFront();
-        }, 2000);
+        }, 1000);
     }
 
     _flipToBack = () => {
@@ -122,6 +122,11 @@ class DeckStartQuiz extends Component {
         const percentual = Math.floor( correctAnswer / total * 100);
 
         if ( index === total ){
+            this.setState({
+                index:0,
+                isFlipped: !this.state.isFlipped,
+                correctAnswer: 0,
+            });
             clearLocalNotification()
                   .then(setLocalNotification);
             this.props.navigation.navigate(

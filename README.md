@@ -4,7 +4,9 @@ Below you'll find information about performing common tasks. The most recent ver
 
 ## Table of Contents
 
-* [Updating to New Releases](#updating-to-new-releases)
+* [Installation](#Installation)
+* [Usage](#Usage)
+* [Platforms tested](#Platforms tested)
 * [Available Scripts](#available-scripts)
   * [npm start](#npm-start)
   * [npm test](#npm-test)
@@ -38,7 +40,7 @@ Below you'll find information about performing common tasks. The most recent ver
   ```
 ## Platforms tested
 
-The app was tested in Android plataform using Expo on smaartphone. To install Expo on smartphone, download Expo at Play Store.
+The app was tested in Android plataform using Expo on smartphone. To install Expo on smartphone, download Expo at Play Store.
 
 ## Updating to New Releases
 
